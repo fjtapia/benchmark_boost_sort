@@ -124,6 +124,7 @@ All the parallel algorithms don't need any library, only need for to compile and
 * **sample\_sort**. Parallel stable sort with an additional memory equal to the data size. Implemented by Francisco Tapia
 * **parallel\_stable\_sort**. Parallel stable sort with an additional memory of a half of the data size. Internally based on sample_sort. Implemented by Francisco Tapia.
 
+
 | Algorithm | Stable | Additional memory | Best, average, and worst case |
 | --- | --- | --- | --- | --- |
 | block_indirect_sort | no | block_size \* num_threads | N, NLogN, NLogN  |
