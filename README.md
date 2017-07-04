@@ -127,7 +127,7 @@ All the parallel algorithms don't need any library, only need for to compile and
 
 | Algorithm | Stable | Additional memory | Best, average, and worst case |
 | --- | --- | --- | --- | --- |
-| block_indirect_sort | no | block_size \* num_threads | N, NLogN, NLogN  |
+| block_indirect_sort | no | block_size x num_threads | N, NLogN, NLogN  |
 | sample_sort | yes | N  | N, NLogN, NLogN  |
 | parallel_stable_sort| yes | N / 2 | N, NLogN, NLogN   |
 
