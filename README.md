@@ -126,7 +126,7 @@ All the parallel algorithms don't need any library, only need for to compile and
 
 | Algorithm | Stable | Additional memory | Best, average, and worst case |
 | --- | --- | --- | --- | --- |
-| block_indirect\_sort | no | block_size\* num_threads | N, NLogN, NLogN  |
+| block\_indirect\_sort | no | block_size \* num_threads | N, NLogN, NLogN  |
 | sample\_sort | yes | N  | N, NLogN, NLogN  |
 | parallel\_stable\_sort| yes | N / 2 | N, NLogN, NLogN   |
 
@@ -134,7 +134,7 @@ All the parallel algorithms don't need any library, only need for to compile and
 
 The block_size is an internal parameter of the algorithm, which  in order to achieve the highest speed, change according the size of the objects to sort according the next table. The **strings** use a block_size of 128.
 
-| object size (bytes) |1 - 15| 16 - 31 | 32 - 63 | 64 - 127 |   128 - 255 | 256 - 511 | 512 - |
+| object size (bytes) |1 - 15| 16 - 31 | 32 - 63 | 64 - 127 | 128 - 255 | 256 - 511 | 512 - |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | block_size |4096 |2048 | 1024| 768 | 512 | 256 | 128 |
 
