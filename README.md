@@ -127,13 +127,12 @@ The parallel algorithms of the library are :
 * **parallel_stable_sort**. Parallel stable sort with an additional memory of a half of the data size. Internally based on sample_sort. Implemented by Francisco Tapia.
 
 
+
 | Algorithm | Stable | Additional memory | Best, average, and worst case |
-| --- | --- | --- | --- | --- |
-| block_indirect_sort | no | block_size x num_threads | N, NLogN, NLogN  |
-| sample_sort | yes | N  | N, NLogN, NLogN  |
-| parallel_stable_sort| yes | N / 2 | N, NLogN, NLogN   |
-
-
+| --- | --- | --- | --- |
+| block_indirect_sort | no |block_size x num_threads   | N, NLogN, NLogN |
+| sample_sort | yes |  N  | N, NLogN, NLogN |
+| parallel_stable_sort | yes| N / 2 | N, NLogN, NLogN   |
 
 The block_size is an internal parameter of the algorithm, which  in order to achieve the highest speed, change according the size of the objects to sort according the next table. The **strings** use a block_size of 128.
 
