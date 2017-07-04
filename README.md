@@ -99,7 +99,7 @@ If don't run in your computer, probably, need to install the redistributable 201
 
 This table provide you a brief description of the sort algorithms of the library.
 
-**<H4>Single thread algorithms</h4>**
+**<H4>SINGLE THREAD ALGORITHMS</H4>**
 
 The single thread algorithms of the library are :
 
@@ -116,13 +116,15 @@ The single thread algorithms of the library are :
 | flat_stable_sort | yes| N / 100 | N, NLogN, NLogN   |
 
 
-**<H4>Parallel algorithms</h4>**
-The parallel algorithms of the library are :
+**<H4>PARALLEL ALGORITHMS</H4>**
+
 All the parallel algorithms don't need any library, only need for to compile and run a C++11 compliant compiler.
 
+The parallel algorithms of the library are :
+
 * **block_indirect_sort**. Very fast parallel sort, with a very small additional memory. Designed and implemented by Francisco Tapia
-* **sample\_sort**. Parallel stable sort with an additional memory equal to the data size. Implemented by Francisco Tapia
-* **parallel\_stable\_sort**. Parallel stable sort with an additional memory of a half of the data size. Internally based on sample_sort. Implemented by Francisco Tapia.
+* **sample_sort**. Parallel stable sort with an additional memory equal to the data size. Implemented by Francisco Tapia
+* **parallel_stable_sort**. Parallel stable sort with an additional memory of a half of the data size. Internally based on sample_sort. Implemented by Francisco Tapia.
 
 
 | Algorithm | Stable | Additional memory | Best, average, and worst case |
