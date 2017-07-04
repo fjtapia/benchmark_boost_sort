@@ -99,7 +99,7 @@ If don't run in your computer, probably, need to install the redistributable 201
 
 This table provide you a brief description of the sort algorithms of the library.
 
-<H4>**Single thread algorithms**</h4>
+**<H4>Single thread algorithms</h4>**
 
 The single thread algorithms of the library are :
 
@@ -116,7 +116,7 @@ The single thread algorithms of the library are :
 | flat_stable\_sort | yes| N / 100 | N, NLogN, NLogN   |
 
 
-<H4>**Parallel algorithms**</h4>
+**<H4>Parallel algorithms</h4>**
 The parallel algorithms of the library are :
 All the parallel algorithms don't need any library, only need for to compile and run a C++11 compliant compiler.
 
