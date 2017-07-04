@@ -113,7 +113,7 @@ The single thread algorithms of the library are :
 | spreadsort | yes | Log N  | N, NLogN, NLogN |
 | pdqsort | no | Log N  | N, NLogN, NLogN |
 | spinsort | yes | N / 2  | N, NLogN, NLogN |
-| flat_stable\_sort | yes| N / 100 | N, NLogN, NLogN   |
+| flat_stable_sort | yes| N / 100 | N, NLogN, NLogN   |
 
 
 **<H4>Parallel algorithms</h4>**
@@ -126,9 +126,9 @@ All the parallel algorithms don't need any library, only need for to compile and
 
 | Algorithm | Stable | Additional memory | Best, average, and worst case |
 | --- | --- | --- | --- | --- |
-| block\_indirect\_sort | no | block_size \* num_threads | N, NLogN, NLogN  |
-| sample\_sort | yes | N  | N, NLogN, NLogN  |
-| parallel\_stable\_sort| yes | N / 2 | N, NLogN, NLogN   |
+| block_indirect_sort | no | block_size \* num_threads | N, NLogN, NLogN  |
+| sample_sort | yes | N  | N, NLogN, NLogN  |
+| parallel_stable_sort| yes | N / 2 | N, NLogN, NLogN   |
 
 
 
