@@ -75,7 +75,8 @@
             <br />
             <a href="parallel.html#par_benchmarks">5.- Parallel Benchmarks</a><br />
             <div style="margin-left: 40px;"><a href="parallel.html#par_gcc">5.1.-
-                Linux x64 GCC 6.3</a></div>
+                Linux x64 GCC 6.3</a><br />
+              <a href="parallel.html#par_vc">5.2.- Windows 10 VC++2017</a></div>
           </div>
           <br />
           <a href="benchmark.html#gratitude"> </a>
@@ -894,7 +895,7 @@ use only the first number of the array.<br /><br />The computer used is a Intel(
   |             |<br />
   -------------------------+-------------+<br /><br />  </code> </div><br /><br />
 
-</div><a name="par_gcc"></a> <span style="font-size: 18pt;font-weight: bold; color: black;">5.1.- Windows 10  VC++2017  </span><br /><div
+</div><a name="par_vc"></a> <span style="font-size: 18pt;font-weight: bold; color: black;">5.1.- Windows 10  VC++2017  </span><br /><div
 style="margin-left: 80px;"><br />
 In the library you can find benchmarks programs for to measure the speed of the algorithms in your machine and operating system.<br /><br />There
  are 3 types of benchmarks, with 64 bits integers, with strings and with objects of several sizes. The objects are arrays of integers. With the
