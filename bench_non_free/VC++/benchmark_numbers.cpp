@@ -81,6 +81,7 @@ int main(int argc, char *argv[])
     };
 
     if ( option < 17) Test(A,option);
+
     return 0;
 };
 
@@ -149,7 +150,7 @@ int Test(vector<uint64_t> &A, int option)
         case 7:
             cout << "PPL   parallel sort                  : ";
             start = now();
-            concurrency::parallel_buffered_sort(A.begin(), A.end());
+            concurrency::parallel_sort(A.begin(), A.end());
             finish = now();
             duration = subtract_time(finish, start);
             std::cout << duration << " secs\n";
@@ -158,7 +159,7 @@ int Test(vector<uint64_t> &A, int option)
         case 8:
             cout << "PPL Parallel Buffered Sort           : ";
             start = now();
-            concurrency::parallel_sort(A.begin(), A.end());
+            concurrency::parallel_buffered_sort(A.begin(), A.end());
             finish = now();
             duration = subtract_time(finish, start);
             std::cout << duration << " secs\n";

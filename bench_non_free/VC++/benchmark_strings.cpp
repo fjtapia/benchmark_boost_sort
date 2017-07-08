@@ -80,6 +80,7 @@ int main(int argc, char *argv[])
         return 1;
     };
     Test(A, option);
+
     return 0;
 };
 
@@ -148,7 +149,7 @@ int Test(vector<std::string> &A, int option)
         case 7:
             cout << "PPL   parallel sort                  : ";
             start = now();
-            concurrency::parallel_buffered_sort(A.begin(), A.end());
+            concurrency::parallel_sort(A.begin(), A.end());
             finish = now();
             duration = subtract_time(finish, start);
             std::cout << duration << " secs\n";
@@ -157,7 +158,7 @@ int Test(vector<std::string> &A, int option)
         case 8:
             cout << "PPL Parallel Buffered Sort           : ";
             start = now();
-            concurrency::parallel_sort(A.begin(), A.end());
+            concurrency::parallel_buffered_sort(A.begin(), A.end());
             finish = now();
             duration = subtract_time(finish, start);
             std::cout << duration << " secs\n";
