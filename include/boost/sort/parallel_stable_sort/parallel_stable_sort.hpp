@@ -13,7 +13,7 @@
 #ifndef __BOOST_SORT_PARALLEL_DETAIL_PARALLEL_STABLE_SORT_HPP
 #define __BOOST_SORT_PARALLEL_DETAIL_PARALLEL_STABLE_SORT_HPP
 
-#include <boost/sort/parallel/sample_sort.hpp>
+#include <boost/sort/sample_sort/sample_sort.hpp>
 #include <boost/sort/common/util/traits.hpp>
 #include <functional>
 #include <future>
@@ -26,8 +26,6 @@ namespace boost
 {
 namespace sort
 {
-namespace parallel
-{
 namespace stable_detail
 {
 
@@ -38,7 +36,7 @@ namespace bsc = boost::sort::common;
 namespace bss = boost::sort::spin_detail;
 using bsc::range;
 using bsc::merge_half;
-using boost::sort::parallel::sample_detail::sample_sort;
+using boost::sort::sample_detail::sample_sort;
 //
 ///---------------------------------------------------------------------------
 /// @struct parallel_stable_sort
@@ -265,7 +263,6 @@ void parallel_stable_sort(Iter_t first, Iter_t last, Compare comp)
 };
 //
 //****************************************************************************
-};//    End namespace parallel
 };//    End namespace sort
 };//    End namespace boost
 //****************************************************************************

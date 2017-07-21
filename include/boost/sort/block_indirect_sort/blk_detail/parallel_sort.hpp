@@ -14,7 +14,7 @@
 #ifndef __BOOST_SORT_PARALLEL_DETAIL_PARALLEL_SORT_HPP
 #define __BOOST_SORT_PARALLEL_DETAIL_PARALLEL_SORT_HPP
 
-#include <boost/sort/parallel/detail/backbone.hpp>
+#include <boost/sort/block_indirect_sort/blk_detail/backbone.hpp>
 #include <boost/sort/pdqsort/pdqsort.h>
 #include <boost/sort/common/pivot.hpp>
 
@@ -22,9 +22,7 @@ namespace boost
 {
 namespace sort
 {
-namespace parallel
-{
-namespace detail
+namespace blk_detail
 {
 
 //----------------------------------------------------------------------------
@@ -230,8 +228,7 @@ void parallel_sort<Block_size, Iter_t, Compare>
 };
 //
 //****************************************************************************
-};//    End namespace block_detail
-};//    End namespace parallel
+};//    End namespace blk_detail
 };//    End namespace sort
 };//    End namespace boost
 //****************************************************************************

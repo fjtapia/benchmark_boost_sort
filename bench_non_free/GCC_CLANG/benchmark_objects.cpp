@@ -40,7 +40,7 @@ using namespace std;
 using namespace std;
 namespace bsort = boost::sort;
 namespace bsc = bsort::common;
-namespace bsp = bsort::parallel;
+namespace bsp = bsort;
 
 using bsc::time_point;
 using bsc::now;

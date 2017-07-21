@@ -26,7 +26,6 @@
 using namespace std;
 namespace bsort = boost::sort;
 namespace bsc = bsort::common;
-namespace bsp = bsort::parallel;
 
 using bsc::time_point;
 using bsc::now;
@@ -241,7 +240,7 @@ int Test(std::vector<IA> &A, rightshift shift, compare comp, int option)
 
         case 9:
             start = now();
-            bsp::block_indirect_sort(A.begin(), A.end(), comp);
+            bsort::block_indirect_sort(A.begin(), A.end(), comp);
             finish = now();
             duration = subtract_time(finish, start);
             cout << duration << " secs\n";
@@ -249,7 +248,7 @@ int Test(std::vector<IA> &A, rightshift shift, compare comp, int option)
 
         case 10:
             start = now();
-            bsp::sample_sort(A.begin(), A.end(), comp);
+            bsort::sample_sort(A.begin(), A.end(), comp);
             finish = now();
             duration = subtract_time(finish, start);
             cout << duration << " secs\n";
@@ -257,7 +256,7 @@ int Test(std::vector<IA> &A, rightshift shift, compare comp, int option)
 
         case 11:
             start = now();
-            bsp::parallel_stable_sort(A.begin(), A.end(), comp);
+            bsort::parallel_stable_sort(A.begin(), A.end(), comp);
             finish = now();
             duration = subtract_time(finish, start);
             cout << duration << " secs\n";

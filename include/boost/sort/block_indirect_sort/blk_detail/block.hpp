@@ -20,9 +20,7 @@ namespace boost
 {
 namespace sort
 {
-namespace parallel
-{
-namespace detail
+namespace blk_detail
 {
 //---------------------------------------------------------------------------
 //                 USING SENTENCES
@@ -174,8 +172,7 @@ struct compare_block_pos
 }; // end struct compare_block_pos
 
 //****************************************************************************
-}; //    End namespace block_detail
-}; //    End namespace parallel
+}; //    End namespace blk_detail
 }; //    End namespace sort
 }; //    End namespace boost
 //****************************************************************************

@@ -23,15 +23,13 @@
 #include <iostream>
 #include <iterator>
 
-#include <boost/sort/parallel/detail/block.hpp>
+#include <boost/sort/block_indirect_sort/blk_detail/block.hpp>
 
 namespace boost
 {
 namespace sort
 {
-namespace parallel
-{
-namespace detail
+namespace blk_detail
 {
 
 //---------------------------------------------------------------------------
@@ -54,13 +52,13 @@ struct backbone
     //-------------------------------------------------------------------------
     //                  D E F I N I T I O N S
     //-------------------------------------------------------------------------
-    typedef typename std::iterator_traits< Iter_t >::value_type	value_t;
-    typedef std::atomic< uint32_t > 							atomic_t;
-    typedef range< size_t > 									range_pos;
-    typedef range< Iter_t > 									range_it;
-    typedef range< value_t * > 									range_buf;
-    typedef std::function< void(void) > 						function_t;
-    typedef block< Block_size, Iter_t > 						block_t;
+    typedef typename std::iterator_traits< Iter_t >::value_type value_t;
+    typedef std::atomic< uint32_t >                             atomic_t;
+    typedef range< size_t >                                     range_pos;
+    typedef range< Iter_t >                                     range_it;
+    typedef range< value_t * >                                  range_buf;
+    typedef std::function< void(void) >                         function_t;
+    typedef block< Block_size, Iter_t >                         block_t;
 
     //------------------------------------------------------------------------
     //                V A R I A B L E S
@@ -214,8 +212,7 @@ void backbone< Block_size, Iter_t, Compare >::exec (atomic_t &counter)
 };
 //
 //****************************************************************************
-}; //    End namespace block_detail
-}; //    End namespace parallel
+}; //    End namespace blk_detail
 }; //    End namespace sort
 }; //    End namespace boost
 //****************************************************************************

@@ -38,7 +38,7 @@
 using namespace std;
 namespace bsc = boost::sort::common;
 namespace bsort = boost::sort;
-namespace bsp = boost::sort::parallel;
+namespace bsp = boost::sort;
 
 using bsc::time_point;
 using bsc::now;

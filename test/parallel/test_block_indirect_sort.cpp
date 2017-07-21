@@ -19,78 +19,17 @@
 #include <ciso646>
 #include <boost/test/included/test_exec_monitor.hpp>
 #include <boost/test/test_tools.hpp>
-#include <boost/sort/parallel/block_indirect_sort.hpp>
+#include <boost/sort/sort.hpp>
 
 
 namespace bsc = boost::sort::common;
-namespace bsp = boost::sort::parallel;
-using boost::sort::parallel::detail::block_indirect_sort;
+namespace bsp = boost::sort;
+using boost::sort::block_indirect_sort;
 using bsc::range;
+
 
 void test1 (void)
 {
-    std::vector< uint32_t > VN;
-    std::mt19937 my_rand (0);
-    std::less<uint32_t> comp;
-    for (uint32_t i = 0; i < 130; ++i) {
-        VN.push_back (my_rand ( ) % 1000);
-    };
-    block_indirect_sort< 4, 4, uint32_t * > (&VN[ 0 ], &VN[ 130 ],comp, 2);
-    for (uint32_t i = 1; i < VN.size ( ); ++i)
-        BOOST_CHECK (VN[ i - 1 ] <= VN[ i ]);
-
-    VN.clear ( );
-    for (uint32_t i = 0; i < 130; ++i) {
-        VN.push_back (my_rand ( ) % 1000);
-    };
-    block_indirect_sort< 4, 4, uint32_t * > (&VN[ 0 ], &VN[ 130 ],comp, 0);
-    for (uint32_t i = 1; i < VN.size ( ); ++i)
-        BOOST_CHECK (VN[ i - 1 ] <= VN[ i ]);
-};
-
-void test2 ( )
-{
-    uint64_t V1[ 300 ];
-    std::less< uint64_t > comp;
-
-    for (uint32_t i = 0; i < 200; ++i) V1[ i ] = i;
-
-    block_indirect_sort< 4, 4, uint64_t *, std::less< uint64_t > > (
-        &V1[ 0 ], &V1[ 200 ], comp, 2);
-    for (unsigned i = 1; i < 200; i++) {
-        BOOST_CHECK (V1[ i - 1 ] <= V1[ i ]);
-    };
-
-    for (uint32_t i = 0; i < 200; ++i) V1[ i ] = 199 - i;
-
-    block_indirect_sort< 4, 4, uint64_t *, std::less< uint64_t > > (
-        &V1[ 0 ], &V1[ 200 ], comp, 2);
-
-    for (unsigned i = 1; i < 200; i++) {
-        BOOST_CHECK (V1[ i - 1 ] <= V1[ i ]);
-    };
-
-    for (uint32_t i = 0; i < 300; ++i) V1[ i ] = 299 - i;
-
-    block_indirect_sort< 4, 4, uint64_t *, std::less< uint64_t > > (
-        &V1[ 0 ], &V1[ 300 ], comp, 2);
-    for (unsigned i = 1; i < 300; i++) {
-        BOOST_CHECK (V1[ i - 1 ] <= V1[ i ]);
-    };
-
-    for (uint32_t i = 0; i < 300; ++i) V1[ i ] = 88;
-
-    block_indirect_sort< 4, 4, uint64_t *, std::less< uint64_t > > (
-        &V1[ 0 ], &V1[ 300 ], comp, 2);
-    for (unsigned i = 1; i < 300; i++) {
-        BOOST_CHECK (V1[ i - 1 ] <= V1[ i ]);
-    };
-    return;
-};
-
-void test3 (void)
-{
-    typedef typename std::vector< uint64_t >::iterator iter_t;
     typedef std::less< uint64_t > compare;
 
     const uint32_t NElem = 500000;
@@ -99,8 +38,7 @@ void test3 (void)
     compare comp;
 
     for (uint32_t i = 0; i < NElem; ++i) V1.push_back (my_rand ( ) % NElem);
-    block_indirect_sort< 1024, 16, iter_t, compare >
-        (V1.begin ( ), V1.end ( ), comp, 2);
+    block_indirect_sort  (V1.begin ( ), V1.end ( ), comp, 2);
 
     for (unsigned i = 1; i < NElem; i++) {
         BOOST_CHECK (V1[ i - 1 ] <= V1[ i ]);
@@ -109,8 +47,7 @@ void test3 (void)
     V1.clear ( );
     for (uint32_t i = 0; i < NElem; ++i) V1.push_back (i);
 
-    block_indirect_sort< 1024, 16, iter_t, compare > (
-        V1.begin ( ), V1.end ( ), comp, 2);
+    block_indirect_sort ( V1.begin ( ), V1.end ( ), comp, 2);
     for (unsigned i = 1; i < NElem; i++) {
         BOOST_CHECK (V1[ i - 1 ] <= V1[ i ]);
     };
@@ -118,8 +55,7 @@ void test3 (void)
     V1.clear ( );
     for (uint32_t i = 0; i < NElem; ++i) V1.push_back (NElem - i);
 
-    block_indirect_sort< 1024, 16, iter_t, compare > (
-        V1.begin ( ), V1.end ( ), comp, 2);
+    block_indirect_sort ( V1.begin ( ), V1.end ( ), comp, 2);
     for (unsigned i = 1; i < NElem; i++) {
         BOOST_CHECK (V1[ i - 1 ] <= V1[ i ]);
     };
@@ -127,33 +63,28 @@ void test3 (void)
     V1.clear ( );
     for (uint32_t i = 0; i < NElem; ++i) V1.push_back (1000);
 
-    block_indirect_sort< 1024, 16, iter_t, compare > (
-        V1.begin ( ), V1.end ( ), comp, 2);
+    block_indirect_sort (V1.begin ( ), V1.end ( ), comp, 2);
     for (unsigned i = 1; i < NElem; i++) {
         BOOST_CHECK (V1[ i - 1 ] == V1[ i ]);
     };
 };
 
-void test4 (void)
+void test2 (void)
 {
-    typedef typename std::vector< uint64_t >::iterator iter_t;
-    typedef std::less< uint64_t > compare;
     std::less< uint64_t > comp;
     std::vector< uint64_t > V;
 
     for (uint32_t i = 0; i < 2083333; ++i) V.push_back (i);
 
-    block_indirect_sort< 1024, 32, iter_t, compare > (
-        V.begin ( ), V.end ( ),comp, 8);
+    block_indirect_sort ( V.begin ( ), V.end ( ),comp, 8);
     for (uint32_t i = 0; i < V.size ( ); ++i) {
         BOOST_CHECK (V[ i ] == i);
     };
 };
 
-void test5 (void)
+void test3 (void)
 {
     typedef typename std::vector< uint64_t >::iterator iter_t;
-    typedef std::less< uint64_t > compare;
     typedef range< iter_t > range_it;
 
     const uint32_t NELEM = 416667;
@@ -165,8 +96,8 @@ void test5 (void)
     for (uint32_t i = 0; i < 1000; ++i) A.push_back (0);
 
     range_it R1 (A.begin ( ) + 1000, A.begin ( ) + (1000 + NELEM));
-    block_indirect_sort< 1024, 32, iter_t, compare > (
-        A.begin ( ) + 1000, A.begin ( ) + (1000 + NELEM), comp, 8);
+    block_indirect_sort ( A.begin () + 1000,
+                          A.begin () + (1000 + NELEM), comp, 8);
     for (iter_t it = A.begin ( ) + 1000; it != A.begin ( ) + (1000 + NELEM);
          ++it)
     {
@@ -182,8 +113,8 @@ void test5 (void)
     for (uint32_t i = 0; i < 1000; ++i) A.push_back (999999999);
 
     R1 = range_it (A.begin ( ) + 1000, A.begin ( ) + (1000 + NELEM));
-    block_indirect_sort< 1024, 32, iter_t, compare > (
-        A.begin ( ) + 1000, A.begin ( ) + (1000 + NELEM), comp, 4);
+    block_indirect_sort ( A.begin ( ) + 1000,
+                          A.begin ( ) + (1000 + NELEM), comp, 4);
 
     for (iter_t it = A.begin ( ) + 1001; it != A.begin ( ) + (1000 + NELEM);
          ++it)
@@ -195,9 +126,8 @@ void test5 (void)
                  A[ 1001 + NELEM ] == 999999999);
 };
 
-void test6 (void)
+void test4 (void)
 {
-    typedef typename std::vector< uint32_t >::iterator iter_t;
     typedef std::less< uint32_t > compare;
 
     const uint32_t NElem = 1000000;
@@ -212,80 +142,38 @@ void test6 (void)
     std::sort (V2.begin ( ), V2.end ( ));
 
     V1 = V3;
-    block_indirect_sort< 1024, 32, iter_t, compare > (
-        V1.begin ( ), V1.end ( ), compare(), 2);
+    block_indirect_sort ( V1.begin ( ), V1.end ( ), compare(), 2);
     for (unsigned i = 0; i < V1.size(); i++)
     {
         BOOST_CHECK (V1[ i ] == V2[ i ]);
     };
 
     V1 = V3;
-    block_indirect_sort< 1024, 32, iter_t, compare > (
-        V1.begin ( ), V1.end ( ), compare(), 4);
+    block_indirect_sort (V1.begin ( ), V1.end ( ), compare(), 4);
     for (unsigned i = 0; i < V1.size(); i++)
-    {
-        BOOST_CHECK (V1[ i ] == V2[ i ]);
+    {   BOOST_CHECK (V1[ i ] == V2[ i ]);
     };
 
     V1 = V3;
 
-    block_indirect_sort< 1024, 32, iter_t, compare > (
-        V1.begin ( ), V1.end ( ), compare(), 8);
-
-    for (uint32_t i = 1 ; i < V1.size() ; ++i)
-    {
-        BOOST_CHECK ( V1[i] >= V1[i-1]);
-    }
+    block_indirect_sort (V1.begin ( ), V1.end ( ), compare(), 8);
 
     for (unsigned i = 0; i < V1.size(); i++)
-    {
-        BOOST_CHECK (V1[ i ] == V2[ i ]);
+    {   BOOST_CHECK (V1[ i ] == V2[ i ]);
     };
 
     V1 = V3;
-    block_indirect_sort< 1024, 32, iter_t, compare > (
-        V1.begin ( ), V1.end ( ), compare(), 16);
-    for (unsigned i = 0; i < V1.size(); i++) {
-        BOOST_CHECK (V1[ i ] == V2[ i ]);
+    block_indirect_sort ( V1.begin ( ), V1.end ( ), compare(), 16);
+    for (unsigned i = 0; i < V1.size(); i++)
+    {   BOOST_CHECK (V1[ i ] == V2[ i ]);
     };
 
     V1 = V3;
-    block_indirect_sort< 1024, 32, iter_t, compare > (
-        V1.begin ( ), V1.end ( ), compare(), 100);
-    for (unsigned i = 1; i < V1.size(); i++) {
-        BOOST_CHECK (V1[ i ] == V2[ i ]);
-    };
-
-};
-
-void test7 ( )
-{
-    typedef typename std::vector< uint64_t >::iterator iter_t;
-    typedef std::less< uint64_t > compare;
-
-    const uint32_t NELEM = 10000000;
-    std::mt19937_64 my_rand (0);
-    std::vector< uint64_t > A, B;
-    A.reserve (NELEM);
-    compare comp;
-
-    for (uint32_t i = 0; i < NELEM; i++) {
-        A.push_back (my_rand ( ));
-    };
-    B = A;
-
-    block_indirect_sort< 1024, 32, iter_t, compare >
-    ( A.begin ( ), A.end ( ), comp, 8);
-    for (unsigned i = 0; i < (A.size ( ) - 1); i++) {
-        BOOST_CHECK (A[ i ] <= A[ i + 1 ]);
-    };
-    std::sort (B.begin ( ), B.end ( ));
-    for (unsigned i = 0; i < NELEM; i++) {
-        BOOST_CHECK (A[ i ] == B[ i ]);
+    block_indirect_sort ( V1.begin ( ), V1.end ( ), compare(), 100);
+    for (unsigned i = 1; i < V1.size(); i++)
+    {   BOOST_CHECK (V1[ i ] == V2[ i ]);
     };
 };
-
-
 
 template<uint32_t NN>
 struct int_array
@@ -304,9 +192,9 @@ struct int_array
 	}
 };
 
-void test8(void)
+void test5(void)
 {
-	namespace bspd = boost::sort::parallel::detail;
+	namespace bspd = boost::sort::blk_detail;
 	BOOST_CHECK(bspd::block_size<0>::data == 4096);
 
 	BOOST_CHECK(bspd::block_size<1>::data == 4096);
@@ -352,10 +240,9 @@ void test8(void)
 	BOOST_CHECK(bspd::block_size<512>::data == 128);
 	BOOST_CHECK(bspd::block_size<513>::data == 128);
 	BOOST_CHECK(bspd::block_size<600>::data == 128);
-}
-;
+};
 
-void test9()
+void test6()
 {
 	std::less<uint64_t> cmp64;
 	std::less<uint32_t> cmp32;
@@ -405,8 +292,7 @@ void test9()
 	{
 		BOOST_CHECK(p8[i - 1] <= p8[i]);
 	};
-}
-;
+};
 
 template<class IA>
 void test_int_array(uint32_t NELEM)
@@ -426,7 +312,7 @@ void test_int_array(uint32_t NELEM)
 	};
 }
 
-void test10()
+void test7()
 {
 	test_int_array<int_array<1> >(1u << 20);
 	test_int_array<int_array<2> >(1u << 19);
@@ -437,7 +323,7 @@ void test10()
 	test_int_array<int_array<64> >(1u << 17);
 	test_int_array<int_array<128> >(1u << 17);
 }
-void test11()
+void test8()
 {
 	std::mt19937_64 my_rand(0);
 	const uint32_t NELEM = 1 << 20;
@@ -493,9 +379,6 @@ int test_main (int, char *[])
     test6  ( );
     test7  ( );
     test8  ( );
-    test9  ( );
-    test10 ( );
-    test11 ( );
 
     return 0;
 };

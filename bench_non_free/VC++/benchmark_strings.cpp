@@ -26,7 +26,7 @@ using namespace std;
 
 namespace bsc = boost::sort::common;
 namespace bsort = boost::sort;
-namespace bsp = boost::sort::parallel;
+
 
 using bsc::time_point;
 using bsc::now;
@@ -167,7 +167,7 @@ int Test(vector<std::string> &A, int option)
         case 9:
             cout << "Boost block_indirect_sort            : ";
             start = now();
-            bsp::block_indirect_sort(A.begin(), A.end(), comp);
+            bsort::block_indirect_sort(A.begin(), A.end(), comp);
             finish = now();
             duration = subtract_time(finish, start);
             cout << duration << " secs\n";
@@ -176,7 +176,7 @@ int Test(vector<std::string> &A, int option)
         case 10:
             cout << "Boost sample sort                    : ";
             start = now();
-            bsp::sample_sort(A.begin(), A.end(), comp);
+            bsort::sample_sort(A.begin(), A.end(), comp);
             finish = now();
             duration = subtract_time(finish, start);
             cout << duration << " secs\n";
@@ -185,7 +185,7 @@ int Test(vector<std::string> &A, int option)
         case 11:
             cout << "Boost parallel stable sort           : ";
             start = now();
-            bsp::parallel_stable_sort(A.begin(), A.end(), comp);
+            bsort::parallel_stable_sort(A.begin(), A.end(), comp);
             finish = now();
             duration = subtract_time(finish, start);
             cout << duration << " secs\n";

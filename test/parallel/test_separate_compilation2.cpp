@@ -19,9 +19,9 @@
 #include <ciso646>
 //#include <boost/test/included/test_exec_monitor.hpp>
 //#include <boost/test/test_tools.hpp>
-#include <boost/sort/parallel/sort.hpp>
+#include <boost/sort/sort.hpp>
 
-namespace bsp = boost::sort::parallel;
+namespace bsp = boost::sort;
 void function1A(std::vector<uint32_t> & V1);
 void function1B(std::vector<uint32_t> & V1);
 void function1C(std::vector<uint32_t> & V1);
@@ -71,9 +71,6 @@ void function2C(std::vector<uint32_t> & V1)
 
 int main(int argc, char *argv[])
 {
-    typedef typename std::vector<uint32_t>::iterator iter_t;
-    typedef std::less<uint32_t> compare;
-
     const uint32_t NElem = 1000000;
     std::vector<uint32_t> V1, V2, V3;
     V1.reserve(NElem);

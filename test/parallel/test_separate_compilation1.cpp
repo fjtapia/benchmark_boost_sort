@@ -19,9 +19,9 @@
 #include <ciso646>
 //#include <boost/test/included/test_exec_monitor.hpp>
 //#include <boost/test/test_tools.hpp>
-#include <boost/sort/parallel/sort.hpp>
+#include <boost/sort/sort.hpp>
 
-namespace bsp = boost::sort::parallel;
+namespace bsp = boost::sort;
 void function1A(std::vector<uint32_t> & V1)
 {
 

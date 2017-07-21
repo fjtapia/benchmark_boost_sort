@@ -32,7 +32,6 @@
 using namespace std;
 namespace bsort = boost::sort;
 namespace bsc = bsort::common;
-namespace bpar = bsort::parallel;
 
 using bsc::time_point;
 using bsc::now;
@@ -65,16 +64,16 @@ int Test_spreadsort(std::vector<IA> &A, rightshift shift, compare comp);
 
 template < class IA >
 struct H_rightshift {
-	inline uint64_t operator()(const IA& A1, unsigned offset) {
-		return A1.counter() >> offset;
-	}
+    inline uint64_t operator()(const IA& A1, unsigned offset) {
+        return A1.counter() >> offset;
+    }
 };
 
 template < class IA >
 struct L_rightshift {
-	inline uint64_t operator()(const IA& A1, unsigned offset) {
-		return A1.M[0] >> offset;
-	}
+    inline uint64_t operator()(const IA& A1, unsigned offset) {
+        return A1.M[0] >> offset;
+    }
 };
 
 
@@ -178,12 +177,12 @@ void Generator(uint64_t N)
     cout << "\n  H E A V Y   C O M P A R I S O N\n";
     cout << "====================================\n";
     Test(A, H_comp<IA>());
-	Test_spreadsort(A, H_rightshift<IA>(), H_comp<IA>());
+    Test_spreadsort(A, H_rightshift<IA>(), H_comp<IA>());
 
     cout << "\n  L I G H T   C O M P A R I S O N \n";
     cout << "=======================================\n";
     Test(A, L_comp<IA>());
-	Test_spreadsort(A, L_rightshift<IA>(), L_comp<IA>());
+    Test_spreadsort(A, L_rightshift<IA>(), L_comp<IA>());
     cout << std::endl;
 };
 
@@ -202,7 +201,7 @@ int Test(std::vector<IA> &B, compare comp)
     finish = now();
     duration = subtract_time(finish, start);
     cout << duration << " secs\n";
-	
+
     A = B;
     cout << "pdqsort                      : ";
     start = now();
@@ -211,7 +210,7 @@ int Test(std::vector<IA> &B, compare comp)
     duration = subtract_time(finish, start);
     cout << duration << " secs\n";
 
-	A = B;
+    A = B;
     cout << "std::stable_sort             : ";
     start = now();
     std::stable_sort(A.begin(), A.end(), comp);
@@ -254,7 +253,7 @@ int Test(std::vector<IA> &B, compare comp)
     A = B;
     cout << "Boost block_indirect_sort    : ";
     start = now();
-    bpar::block_indirect_sort(A.begin(), A.end(), comp);
+    bsort::block_indirect_sort(A.begin(), A.end(), comp);
     finish = now();
     duration = subtract_time(finish, start);
     cout << duration << " secs\n\n";
@@ -262,7 +261,7 @@ int Test(std::vector<IA> &B, compare comp)
     A = B;
     cout << "Boost sample sort            : ";
     start = now();
-    bpar::sample_sort(A.begin(), A.end(), comp);
+    bsort::sample_sort(A.begin(), A.end(), comp);
     finish = now();
     duration = subtract_time(finish, start);
     cout << duration << " secs\n";
@@ -270,7 +269,7 @@ int Test(std::vector<IA> &B, compare comp)
     A = B;
     cout << "Boost parallel stable sort   : ";
     start = now();
-    bpar::parallel_stable_sort(A.begin(), A.end(), comp);
+    bsort::parallel_stable_sort(A.begin(), A.end(), comp);
     finish = now();
     duration = subtract_time(finish, start);
     cout << duration << " secs\n\n";
@@ -297,17 +296,17 @@ int Test_spreadsort(std::vector<IA> &B)
 template<class IA, class rightshift, class compare>
 int Test_spreadsort(std::vector<IA> &B, rightshift shift, compare comp)
 {
-	double duration;
-	time_point start, finish;
-	std::vector<IA> A(B);
+    double duration;
+    time_point start, finish;
+    std::vector<IA> A(B);
 
-	A = B;
-	cout << "Boost spreadsort             : ";
-	start = now();
-	boost::sort::spreadsort::integer_sort(A.begin(), A.end(), shift, comp);
-	finish = now();
-	duration = subtract_time(finish, start);
-	cout << duration << " secs\n";
+    A = B;
+    cout << "Boost spreadsort             : ";
+    start = now();
+    boost::sort::spreadsort::integer_sort(A.begin(), A.end(), shift, comp);
+    finish = now();
+    duration = subtract_time(finish, start);
+    cout << duration << " secs\n";
 
-	return 0;
+    return 0;
 };

@@ -15,7 +15,7 @@
 #define __BOOST_SORT_PARALLEL_DETAIL_MERGE_BLOCKS_HPP
 
 #include <atomic>
-#include <boost/sort/parallel/detail/backbone.hpp>
+#include <boost/sort/block_indirect_sort/blk_detail/backbone.hpp>
 #include <boost/sort/common/range.hpp>
 #include <future>
 #include <iostream>
@@ -25,9 +25,7 @@ namespace boost
 {
 namespace sort
 {
-namespace parallel
-{
-namespace detail
+namespace blk_detail
 {
 //----------------------------------------------------------------------------
 //                          USING SENTENCES
@@ -420,8 +418,7 @@ void merge_blocks<Block_size, Group_size, Iter_t, Compare>
 }
 //
 //****************************************************************************
-}; //    End namespace block_detail
-}; //    End namespace parallel
+}; //    End namespace blk_detail
 }; //    End namespace sort
 }; //    End namespace boost
 //****************************************************************************

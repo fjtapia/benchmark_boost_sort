@@ -14,9 +14,9 @@
 #define __BOOST_SORT_PARALLEL_DETAIL_BLOCK_INDIRECT_SORT_HPP
 
 #include <atomic>
-#include <boost/sort/parallel/detail/merge_blocks.hpp>
-#include <boost/sort/parallel/detail/move_blocks.hpp>
-#include <boost/sort/parallel/detail/parallel_sort.hpp>
+#include <boost/sort/block_indirect_sort/blk_detail/merge_blocks.hpp>
+#include <boost/sort/block_indirect_sort/blk_detail/move_blocks.hpp>
+#include <boost/sort/block_indirect_sort/blk_detail/parallel_sort.hpp>
 #include <boost/sort/pdqsort/pdqsort.h>
 #include <boost/sort/common/util/traits.hpp>
 #include <boost/sort/common/util/algorithm.hpp>
@@ -31,9 +31,7 @@ namespace boost
 {
 namespace sort
 {
-namespace parallel
-{
-namespace detail
+namespace blk_detail
 {
 //---------------------------------------------------------------------------
 //         USING SENTENCES
@@ -414,7 +412,7 @@ inline void block_indirect_sort_call (Iter_t first, Iter_t last, Compare cmp,
 
 //
 //****************************************************************************
-}; //    End namespace block_detail
+}; //    End namespace blk_detail
 //****************************************************************************
 //
 namespace bscu = boost::sort::common::util;
@@ -438,8 +436,8 @@ template<class Iter_t>
 void block_indirect_sort(Iter_t first, Iter_t last)
 {
     typedef bscu::compare_iter<Iter_t> Compare;
-    detail::block_indirect_sort_call (first, last, Compare(),
-                                      std::thread::hardware_concurrency());
+    blk_detail::block_indirect_sort_call (first, last, Compare(),
+                                          std::thread::hardware_concurrency());
 }
 
 //
@@ -456,7 +454,7 @@ template<class Iter_t>
 void block_indirect_sort(Iter_t first, Iter_t last, uint32_t nthread)
 {
     typedef bscu::compare_iter<Iter_t> Compare;
-    detail::block_indirect_sort_call(first, last, Compare(), nthread);
+    blk_detail::block_indirect_sort_call(first, last, Compare(), nthread);
 }
 //
 //-----------------------------------------------------------------------------
@@ -472,7 +470,7 @@ template <class Iter_t, class Compare,
           bscu::enable_if_not_integral<Compare> * = nullptr>
 void block_indirect_sort(Iter_t first, Iter_t last, Compare comp)
 {
-    detail::block_indirect_sort_call (first, last, comp,
+    blk_detail::block_indirect_sort_call (first, last, comp,
                                       std::thread::hardware_concurrency());
 }
 
@@ -492,11 +490,10 @@ template<class Iter_t, class Compare>
 void block_indirect_sort (Iter_t first, Iter_t last, Compare comp,
                           uint32_t nthread)
 {
-    detail::block_indirect_sort_call(first, last, comp, nthread);
+    blk_detail::block_indirect_sort_call(first, last, comp, nthread);
 }
 //
 //****************************************************************************
-}; //    End namespace parallel
 }; //    End namespace sort
 }; //    End namespace boost
 //****************************************************************************

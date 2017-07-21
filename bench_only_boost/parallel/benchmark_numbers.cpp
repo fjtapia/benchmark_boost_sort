@@ -27,7 +27,7 @@
 #include <boost/sort/common/file_vector.hpp>
 #include <boost/sort/common/int_array.hpp>
 
-#include <boost/sort/parallel/sort.hpp>
+#include <boost/sort/sort.hpp>
 
 #define NELEM 100000000
 
@@ -40,7 +40,7 @@ using bsc::now;
 using bsc::subtract_time;
 using bsc::fill_vector_uint64;
 using bsc::write_file_uint64;
-using namespace boost::sort::parallel;
+using namespace boost::sort;
 
 void Generator_random (void);
 void Generator_sorted (void);

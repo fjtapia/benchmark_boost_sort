@@ -32,8 +32,6 @@ namespace boost
 {
 namespace sort
 {
-namespace parallel
-{
 namespace sample_detail
 {
 //---------------------------------------------------------------------------
@@ -555,7 +553,6 @@ void sample_sort(Iter_t first, Iter_t last, Compare comp, uint32_t nthread)
 };
 //
 //****************************************************************************
-};//    End namespace parallel
 };//    End namespace sort
 };//    End namespace boost
 //****************************************************************************

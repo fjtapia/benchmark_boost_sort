@@ -44,7 +44,7 @@
 using namespace std;
 namespace bsort = boost::sort;
 namespace bsc = bsort::common;
-namespace bpar = bsort::parallel;
+namespace bpar = bsort;
 
 using bsc::time_point;
 using bsc::now;

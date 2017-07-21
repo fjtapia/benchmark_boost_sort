@@ -17,12 +17,12 @@
 #include <vector>
 #include <random>
 #include <algorithm>
-#include <boost/sort/parallel/parallel_stable_sort.hpp>
+#include <boost/sort/parallel_stable_sort/parallel_stable_sort.hpp>
 #include <boost/test/included/test_exec_monitor.hpp>
 #include <boost/test/test_tools.hpp>
 
 using namespace std;
-namespace bsort = boost::sort::parallel::stable_detail;
+namespace bsort = boost::sort::stable_detail;
 
 typedef typename std::vector<uint64_t>::iterator iter_t;
 
@@ -30,13 +30,10 @@ std::mt19937_64 my_rand(0);
 
 struct xk
 {
-    unsigned tail :3;
-    unsigned num :24;
-    bool operator<(xk A) const
-    {
-        return (num < A.num);
-    }
-    ;
+    unsigned tail : 4;
+    unsigned num : 28;
+    xk ( uint32_t n =0 , uint32_t t =0): tail (t), num(n){};
+    bool operator< (xk A) const { return (num < A.num); };
 };
 
 void test3()
@@ -197,7 +194,30 @@ void test7(void)
     for (uint32_t i = 0; i < A.size(); ++i)
         BOOST_CHECK(A[i] == B[i]);
 };
+void test8 (void)
+{
+    typedef typename std::vector<xk>::iterator  iter_t;
+    typedef std::less<xk>                           compare_t;
+    std::mt19937 my_rand (0);
+    std::vector<xk> V ;
+    const uint32_t NELEM = 500000;
+    V.reserve(NELEM * 10);
 
+
+    for (uint32_t k =0 ; k < 10 ; ++k)
+    {   for ( uint32_t i =0 ; i < NELEM ; ++i)
+        {   V.emplace_back(i , k);
+        };
+        iter_t first = V.begin() + (k * NELEM);
+        iter_t last = first + NELEM ;
+        std::shuffle( first, last, my_rand);
+    };
+    bsort::parallel_stable_sort<iter_t, compare_t>
+                            ( V.begin() , V.end(), compare_t());
+    for ( uint32_t i =0 ; i < ( NELEM * 10); ++i)
+    {   BOOST_CHECK ( V[i].num == (i / 10) and V[i].tail == (i %10) );
+    };
+}
 int test_main(int, char *[])
 {
     test3();
@@ -205,5 +225,6 @@ int test_main(int, char *[])
     test5();
     test6();
     test7();
+    test8();
     return 0;
 }
