@@ -13,6 +13,7 @@
 #ifndef __BOOST_SORT_INTROSORT_DETAIL_HEAP_SORT_HPP
 #define __BOOST_SORT_INTROSORT_DETAIL_HEAP_SORT_HPP
 
+#include <ciso646>
 #include <cassert>
 #include <cstdint>
 #include <iterator>
