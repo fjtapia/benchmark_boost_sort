@@ -19,7 +19,6 @@
 #include <memory>
 #include <type_traits>
 #include <vector>
-
 #include <algorithm>
 #include <boost/sort/spinsort/spinsort.hpp>
 #include <boost/sort/common/indirect.hpp>

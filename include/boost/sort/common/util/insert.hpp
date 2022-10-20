@@ -13,10 +13,7 @@
 #ifndef __BOOST_SORT_COMMON_UTIL_INSERT_HPP
 #define __BOOST_SORT_COMMON_UTIL_INSERT_HPP
 
-//#include <boost/sort/spinsort/util/indirect.hpp>
-#include <boost/sort/common/util/insert.hpp>
-#include <boost/sort/common/util/traits.hpp>
-#include <boost/sort/common/util/algorithm.hpp>
+#include <ciso646>
 #include <cstdlib>
 #include <functional>
 #include <iterator>
@@ -24,6 +21,10 @@
 #include <type_traits>
 #include <vector>
 #include <cstddef>
+#include <boost/sort/common/util/insert.hpp>
+#include <boost/sort/common/util/traits.hpp>
+#include <boost/sort/common/util/algorithm.hpp>
+
 
 namespace boost
 {
@@ -38,7 +39,7 @@ namespace here = boost::sort::common::util;
 //############################################################################
 //
 //          D E F I N I T I O N S    O F    F U N C T I O N S
-//    
+//
 // template < class Iter1_t, class Iter2_t, typename Compare>
 // void insert_sorted (Iter1_t first, Iter1_t mid, Iter1_t last,
 //                     Compare comp, Iter2_t  it_aux)
@@ -53,7 +54,7 @@ namespace here = boost::sort::common::util;
 ///               elements to insert
 /// @param last : iterator to the next element of the last in the range
 /// @param comp :
-/// @comments : the two ranges are sorted and in it_aux there is spave for 
+/// @comments : the two ranges are sorted and in it_aux there is spave for
 ///             to store temporally the elements to insert
 //-----------------------------------------------------------------------------
 template<class Iter1_t, class Iter2_t, typename Compare>

@@ -14,14 +14,15 @@
 #define __BOOST_SORT_PARALLEL_DETAIL_BLOCK_INDIRECT_SORT_HPP
 
 #include <atomic>
+#include <future>
+#include <iterator>
 #include <boost/sort/block_indirect_sort/blk_detail/merge_blocks.hpp>
 #include <boost/sort/block_indirect_sort/blk_detail/move_blocks.hpp>
 #include <boost/sort/block_indirect_sort/blk_detail/parallel_sort.hpp>
 #include <boost/sort/pdqsort/pdqsort.h>
 #include <boost/sort/common/util/traits.hpp>
 #include <boost/sort/common/util/algorithm.hpp>
-#include <future>
-#include <iterator>
+
 
 // This value is the minimal number of threads for to use the
 // block_indirect_sort algorithm
